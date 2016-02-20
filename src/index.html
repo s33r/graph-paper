@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Graph-Paper</title>
+
+    <link href='https://fonts.googleapis.com/css?family=Montserrat|Open+Sans' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" type="text/css" href="reset.css">
+    <link rel="stylesheet" type="text/css" href="index.css">
+</head>
+<body>
+
+<div class="top-bar">
+    <button type="button" class="collapse-button" id="toggleCollapseButton">&#8942;</button>
+
+    <div class="main-menu" id="mainMenu">
+
+        <h1 class="menu-title">Graph Paper</h1>
+
+        <label for="colorPicker" class="menu-label sr-only">Color</label>
+        <input type="text" class="menu-item" id="colorPicker">
+
+        <label for="brushPicker" class="menu-label sr-only">Brush</label>
+        <select id="brushPicker" class="menu-item menu-select">
+            <option value="line" selected>Line</option>
+            <option value="box">Box</option>
+        </select>
+
+        <button type="button" class="menu-item menu-button" id="clearButton">Clear</button>
+
+        <p id="mousePositionLabel" class="menu-item menu-label">(344, 231)</p>
+    </div>
+
+</div>
+
+<canvas id="mainCanvas" oncontextmenu="return false;"></canvas>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.22/require.js" data-main="script/main.js"></script>
+
+</body>
+</html>

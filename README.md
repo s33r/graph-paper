@@ -1,2 +1,2 @@
 # graph-paper
-Draw lines a graph paper canvas
+Draw lines a graph paper canvas.
