@@ -1,4 +1,10 @@
-define(['./../shapes/Rectangle'], function (Rectangle) {
+define([
+    '../config',
+    './../shapes/Rectangle',
+    './Entity',
+    './brushes',
+    './snapMethods'
+], function (config, Rectangle, Entity, brushes, snapMethods) {
 
     var _renderBackground = function (context, container, spacing) {
         context.beginPath();
@@ -27,34 +33,21 @@ define(['./../shapes/Rectangle'], function (Rectangle) {
 
             for (var y = 0; y < cells[x].length; y++) {
                 if (cells[x][y]) {
-                    cells[x][y].brush(context,
-                        x * spacing + container.x,
-                        y * spacing + container.y,
-                        cells[x][y].color);
+                    cells[x][y].render(context);
                 }
             }
         }
     };
 
-    var _renderLines = function(context, lines) {
-        for(var lineIndex = 0; lineIndex < lines.length; lineIndex++) {
-            var currentLine = lines[lineIndex];
-            context.beginPath();
-            context.strokeStyle = currentLine.color;
-            context.lineWidth = 1;
-
-            context.moveTo(currentLine.startX, currentLine.startY);
-            context.lineTo(currentLine.endX, currentLine.endY);
-
-            context.closePath();
-            context.stroke();
+    var _renderLines = function (context, lines) {
+        for (var lineIndex = 0; lineIndex < lines.length; lineIndex++) {
+            lines[lineIndex].render(context);
         }
     };
 
 
-    return function Grid(spacing, x, y, width, height) {
+    return function Grid(x, y, width, height) {
         var self = this;
-        this.spacing = spacing;
 
         var cells = [];
         var lines = [];
@@ -68,37 +61,43 @@ define(['./../shapes/Rectangle'], function (Rectangle) {
         };
 
         this.render = function render(context) {
-            _renderBackground(context, self.container, self.spacing);
-            _renderCells(context, cells, self.container, self.spacing);
+            _renderBackground(context, self.container, config.getSpacing());
+            _renderCells(context, cells, self.container, config.getSpacing());
             _renderLines(context, lines);
         };
 
-        this.snapToGrid = function (value) {
-            return value - (value % self.spacing);
+        this.addEntity = function addEntity(entity, x, y) {
+            if(!(entity instanceof Entity)) {
+                throw new Error('entity must be of type Entity');
+            }
+
+            if(!!x && !!y) {
+                if (!cells[x]) {
+                    cells[x] = [];
+                }
+
+                cells[x][y] = entity;
+            } else {
+                lines.push(entity);
+            }
         };
 
         this.locateCell = function locateCell(x, y) {
             var cellBounds = this.getCellBounds(x, y);
 
             return {
-                x: cellBounds.x / spacing,
-                y: cellBounds.y / spacing
-            }
+                x: cellBounds.x / config.getSpacing(),
+                y: cellBounds.y / config.getSpacing()
+            };
         };
 
         this.getCellBounds = function getCell(x, y) {
-            return new Rectangle(this.snapToGrid(x), this.snapToGrid(y), self.spacing, self.spacing);
-        };
-
-        this.setCell = function setCell(x, y, brush, color) {
-            if (!cells[x]) {
-                cells[x] = [];
-            }
-
-            cells[x][y] = {
-                brush: brush,
-                color: color
-            };
+            return new Rectangle(
+                snapMethods.snapToCell(x),
+                snapMethods.snapToCell(y),
+                config.getSpacing(),
+                config.getSpacing()
+            );
         };
 
         this.getCell = function getCell(x, y) {
@@ -122,15 +121,5 @@ define(['./../shapes/Rectangle'], function (Rectangle) {
         };
 
         this.resize(x, y, width, height);
-
-        this.addLine = function addLine(startX, startY, endX, endY, color) {
-            lines.push({
-                color: color,
-                startX: this.snapToGrid(startX),
-                startY: this.snapToGrid(startY),
-                endX: this.snapToGrid(endX),
-                endY: this.snapToGrid(endY)
-            });
-        };
     };
 });

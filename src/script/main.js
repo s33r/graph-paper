@@ -1,4 +1,15 @@
-define(['./render', './formController', 'components/Grid', 'mouse', 'brushes', 'shapes/Line', 'components/GuideLine'], function (render, controller, Grid, mouse, brushes, Line, GuideLine) {
+define([
+    './config',
+    './render',
+    './formController',
+    'components/Grid',
+    'mouse',
+    'components/brushes',
+    'shapes/Line',
+    'components/GuideLine',
+    'components/snapMethods',
+    'components/Entity'
+], function (config, render, controller, Grid, mouse, brushes, Line, GuideLine, snapMethods, Entity) {
 
     var _loopId;
     var _canvasId;
@@ -33,8 +44,8 @@ define(['./render', './formController', 'components/Grid', 'mouse', 'brushes', '
         canvasElement.addEventListener('mousemove', function (e) {
             var mousePosition = render.translatePosition(e.clientX, e.clientY);
 
-            _guideLine.line.endX = _grid.snapToGrid(mousePosition.x);
-            _guideLine.line.endY = _grid.snapToGrid(mousePosition.y);
+            _guideLine.line.endX = snapMethods.snapToGrid(mousePosition.x);
+            _guideLine.line.endY = snapMethods.snapToGrid(mousePosition.y);
 
             mouse.update(
                 e.clientX,
@@ -50,8 +61,8 @@ define(['./render', './formController', 'components/Grid', 'mouse', 'brushes', '
             var formData = controller.getFormData();
 
             if (formData.selectedBrush === brushes.line) {
-                _guideLine.line.startX = _grid.snapToGrid(position.x);
-                _guideLine.line.startY = _grid.snapToGrid(position.y);
+                _guideLine.line.startX = snapMethods.snapToGrid(position.x);
+                _guideLine.line.startY = snapMethods.snapToGrid(position.y);
                 _guideLine.visible = true;
             }
         }, false);
@@ -61,26 +72,39 @@ define(['./render', './formController', 'components/Grid', 'mouse', 'brushes', '
             var mousePosition = mouse.getPosition();
             var formData = controller.getFormData();
 
+            var data = null;
 
             if (formData.selectedBrush === brushes.line) {
-                _grid.addLine(
-                    _guideLine.line.startX,
-                    _guideLine.line.startY,
-                    _guideLine.line.endX,
-                    _guideLine.line.endY,
-                    formData.selectedColor
-                );
+                data = {
+                    color: formData.selectedColor,
+                    startX: _guideLine.line.startX,
+                    startY: _guideLine.line.startY,
+                    endX: _guideLine.line.endX,
+                    endY: _guideLine.line.endY
+                };
 
+                _grid.addEntity(new Entity(data, 'line', snapMethods.snapToGrid));
             } else {
                 var cellCoords = _grid.locateCell(mousePosition.canvasX, mousePosition.canvasY);
-                _grid.setCell(cellCoords.x, cellCoords.y, formData.selectedBrush, formData.selectedColor);
+
+                data = {
+                    x: cellCoords.x * config.getSpacing() + _grid.container.x,
+                    y: cellCoords.y * config.getSpacing() + _grid.container.y,
+                    color: formData.selectedColor
+                };
+
+                _grid.addEntity(
+                    new Entity(data, 'box', snapMethods.snapToCell),
+                    cellCoords.x,
+                    cellCoords.y
+                );
             }
 
         }, false);
     };
 
     var _reset = function _reset() {
-        _grid = new Grid(16, render.getBoundingBox());
+        _grid = new Grid(render.getBoundingBox());
         _guideLine = new GuideLine(
             new Line(),
             'blue'
@@ -94,6 +118,7 @@ define(['./render', './formController', 'components/Grid', 'mouse', 'brushes', '
     };
 
     var _run = function (canvasId) {
+        config.setSpacing(16);
         _canvasId = canvasId;
         var canvasElement = document.getElementById(canvasId);
 
@@ -108,7 +133,7 @@ define(['./render', './formController', 'components/Grid', 'mouse', 'brushes', '
 
         _reset();
 
-        _loopId = _startLoop(16);
+        _loopId = _startLoop();
     };
 
     _run('mainCanvas');

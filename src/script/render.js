@@ -1,7 +1,4 @@
-define(
-    [
-        './shapes/Rectangle'
-    ],
+define(['./shapes/Rectangle'],
     function (Rectangle) {
 
         var _canvas, _context, _canvasElement;

@@ -1,4 +1,4 @@
-define(['mouse', 'brushes'], function (mouse, brushes) {
+define(['mouse', 'components/brushes'], function (mouse, brushes) {
 
     var _currentBrush;
     var _updateBrush = function _updateBrush(brushPicker) {
@@ -31,7 +31,6 @@ define(['mouse', 'brushes'], function (mouse, brushes) {
 
         var mainMenuDisplay = mainMenu.style.display;
         collapseButton.addEventListener('click', function (e) {
-            console.log('menu = %o', mainMenuDisplay);
             if (mainMenu.style.display === mainMenuDisplay) {
                 mainMenu.style.display = 'none';
             } else {
