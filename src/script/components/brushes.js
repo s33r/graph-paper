@@ -75,7 +75,7 @@ define(['../config'], function (config) {
         _drawPositiveSlope(context, _data.x, _data.y, _data.color);
     };
 
-    var _brushLine = function _brushBox(context, data, snapMethod) {
+    var _brushLine = function _brushLine(context, data, snapMethod) {
         var _data = {
             startX: data.startX || 0,
             startY: data.startY || 0,
@@ -102,10 +102,43 @@ define(['../config'], function (config) {
 
     };
 
+    var _crosshair = function _crosshair(context, data, snapMethod) {
+        var spacing = config.getSpacing();
+        var _data = {
+            x: data.x || 0,
+            y: data.y || 0,
+            color: data.color || 'black'
+        };
+
+        _data.x = snapMethod(_data.x);
+        _data.y = snapMethod(_data.y);
+
+        context.beginPath();
+        context.strokeStyle = _data.color;
+        context.lineWidth = 1;
+
+        //_drawLeft(context, _data.x, _data.y);
+        //_drawRight(context, _data.x, _data.y);
+        //_drawTop(context, _data.x, _data.y);
+
+
+        _drawBottom(context, _data.x - spacing, _data.y - spacing);
+        _drawBottom(context, _data.x, _data.y - spacing);
+
+        _drawRight(context, _data.x - spacing, _data.y - spacing);
+        _drawRight(context, _data.x - spacing, _data.y);
+
+        context.stroke();
+        context.closePath();
+
+        //_drawNegativeSlope(context, _data.x, _data.y, _data.color);
+        //_drawPositiveSlope(context, _data.x, _data.y, _data.color);
+    };
 
     return {
         "line": _brushLine,
-        "box": _brushBox
+        "box": _brushBox,
+        "crosshair": _crosshair
     };
 
 });

@@ -10,16 +10,16 @@ define(['./brushes'], function (brushes) {
 
     return function Entity(data, brush, snapMethod) {
         this.data = data || null;
-        this.brush = brush || '';
+        this.brush = brush;
         this.snapMethod = snapMethod || null;
 
-        this.render = function (context) {
-            var brush = brushes[this.brush] || _defaultBrush;
+        this.render = function render(context) {
+            var brush = this.brush || _defaultBrush;
             var data = this.data || {};
             var snapMethod = this.snapMethod || _defaultSnapMethod;
 
             brush && brush(context, data, snapMethod);
-        }
+        };
     };
 
 });

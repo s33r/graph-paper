@@ -15,10 +15,10 @@ define(['./../shapes/Rectangle'], function (Rectangle) {
 
     var _getPosition = function _getPosition() {
         return {
-            clientX: _clientX,
-            clientY: _clientY,
-            canvasX: _canvasX,
-            canvasY: _canvasY,
+            clientX: _clientX || 0,
+            clientY: _clientY || 0,
+            canvasX: _canvasX || 0,
+            canvasY: _canvasY || 0,
             cell: _cell
         };
     };

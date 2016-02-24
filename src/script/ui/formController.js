@@ -2,15 +2,7 @@ define(['./mouse', 'components/brushes', './TypeAhead'], function (mouse, brushe
 
     var _currentBrush;
     var _updateBrush = function _updateBrush(brushPicker) {
-        var brushName;
-        for (var j = 0; j < brushPicker.options.length; j++) {
-            if (brushPicker.options[j].selected) {
-                brushName = brushPicker.options[j].value;
-                break;
-            }
-        }
-
-        _currentBrush = brushes[brushName] || null;
+        _currentBrush = brushPicker.value;
     };
 
     var _currentColor;
@@ -20,11 +12,15 @@ define(['./mouse', 'components/brushes', './TypeAhead'], function (mouse, brushe
 
     var typeAhead;
 
+    var _defaults =  {
+            color: 'blue',
+            brush: 'line'
+        };
+
     var _setup = function _setup(defaults) {
-        var _defaults = defaults || {
-                color: 'blue',
-                brush: 'line'
-            };
+        if (!defaults) {
+            defaults = _defaults;
+        }
 
         var collapseButton = document.getElementById('toggleCollapseButton');
         var mainMenu = document.getElementById('mainMenu');
@@ -43,8 +39,8 @@ define(['./mouse', 'components/brushes', './TypeAhead'], function (mouse, brushe
             }
         });
 
-        colorPicker.value = _defaults.color;
-        brushPicker.value = _defaults.brush;
+        colorPicker.value = defaults.color || _defaults.color;
+        brushPicker.value = defaults.brush || _defaults.brush;
     };
 
     var _updateMousePosition = function (mousePositionLabel) {
@@ -62,8 +58,8 @@ define(['./mouse', 'components/brushes', './TypeAhead'], function (mouse, brushe
 
     var _getFormData = function _getFormData() {
         return {
-            selectedColor: _currentColor,
-            selectedBrush: _currentBrush
+            selectedColor: _currentColor || _defaults.color,
+            selectedBrush: _currentBrush || _defaults.brush
         };
     };
 
