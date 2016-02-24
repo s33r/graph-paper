@@ -42,6 +42,14 @@ define([
             _reset();
         }, false);
 
+        canvasElement.addEventListener('mouseenter', function (e) {
+            _cursor.visible = true;
+        }, false);
+
+        canvasElement.addEventListener('mouseleave', function (e) {
+            _cursor.visible = false;
+        }, false);
+
         canvasElement.addEventListener('mousemove', function (e) {
             var mousePosition = render.translatePosition(e.clientX, e.clientY);
 
@@ -90,8 +98,6 @@ define([
                 cellCoords,
                 _guideLine.line
             );
-
-            console.log('entity = %o', entity);
 
             switch (entity.snapMethod) {
                 case snapMethods.snapToCell:
@@ -159,8 +165,6 @@ define([
 
         _reset();
 
-
-        console.log('_cursor = %o', _cursor);
         _loopId = _startLoop();
     };
 
