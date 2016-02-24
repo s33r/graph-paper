@@ -19,11 +19,17 @@
         <h1 class="menu-title">Graph Paper</h1>
 
         <label for="colorPicker" class="menu-label sr-only">Color</label>
-        <input type="text" class="menu-item" id="colorPicker">
+        <select id="colorPicker" class="menu-item menu-select">
+            <option value="blue" selected>Blue</option>
+            <option value="red">Red</option>
+            <option value="green">Green</option>
+            <option value="black">Black</option>
+        </select>
+
 
         <label for="brushPicker" class="menu-label sr-only">Brush</label>
         <select id="brushPicker" class="menu-item menu-select">
-            <option value="line" selected>Line</option>
+            <option value="line">Line</option>
             <option value="box">Box</option>
         </select>
 

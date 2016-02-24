@@ -1,4 +1,4 @@
-define(['./shapes/Rectangle'], function (Rectangle) {
+define(['./../shapes/Rectangle'], function (Rectangle) {
     var _clientX = 0;
     var _clientY = 0;
     var _canvasX = 0;

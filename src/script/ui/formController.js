@@ -1,4 +1,4 @@
-define(['mouse', 'components/brushes'], function (mouse, brushes) {
+define(['./mouse', 'components/brushes', './TypeAhead'], function (mouse, brushes, TypeAhead) {
 
     var _currentBrush;
     var _updateBrush = function _updateBrush(brushPicker) {
@@ -18,6 +18,8 @@ define(['mouse', 'components/brushes'], function (mouse, brushes) {
         _currentColor = colorPicker.value;
     };
 
+    var typeAhead;
+
     var _setup = function _setup(defaults) {
         var _defaults = defaults || {
                 color: 'blue',
@@ -28,6 +30,9 @@ define(['mouse', 'components/brushes'], function (mouse, brushes) {
         var mainMenu = document.getElementById('mainMenu');
         var colorPicker = document.getElementById('colorPicker');
         var brushPicker = document.getElementById('brushPicker');
+        var colorPickerDropdown = document.getElementById('colorPickerDropdown');
+
+        //typeAhead = new TypeAhead(colorPicker, colorPickerDropdown);
 
         var mainMenuDisplay = mainMenu.style.display;
         collapseButton.addEventListener('click', function (e) {
@@ -39,14 +44,7 @@ define(['mouse', 'components/brushes'], function (mouse, brushes) {
         });
 
         colorPicker.value = _defaults.color;
-
-        for (var j = 0; j < brushPicker.options.length; j++) {
-            if (brushPicker.options[j].text === _defaults.brush) {
-                brushPicker.options[j].selected = true;
-            } else {
-                brushPicker.options[j].false = true;
-            }
-        }
+        brushPicker.value = _defaults.brush;
     };
 
     var _updateMousePosition = function (mousePositionLabel) {

@@ -1,9 +1,9 @@
 define([
     './config',
     './render',
-    './formController',
+    './ui/formController',
     'components/Grid',
-    'mouse',
+    'ui/mouse',
     'components/brushes',
     'shapes/Line',
     'components/GuideLine',
@@ -16,7 +16,6 @@ define([
 
     var _grid;
     var _guideLine;
-
 
     var renderables = [];
 
@@ -61,6 +60,7 @@ define([
             var formData = controller.getFormData();
 
             if (formData.selectedBrush === brushes.line) {
+                _guideLine.color = formData.selectedColor;
                 _guideLine.line.startX = snapMethods.snapToGrid(position.x);
                 _guideLine.line.startY = snapMethods.snapToGrid(position.y);
                 _guideLine.visible = true;
