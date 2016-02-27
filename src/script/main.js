@@ -51,6 +51,8 @@ define([
         }, false);
 
         canvasElement.addEventListener('mousemove', function (e) {
+            _cursor.visible = true;
+
             var mousePosition = render.translatePosition(e.clientX, e.clientY);
 
             _guideLine.line.endX = snapMethods.snapToGrid(mousePosition.x);
@@ -101,7 +103,7 @@ define([
 
             switch (entity.snapMethod) {
                 case snapMethods.snapToCell:
-                    _grid.addEntity(entity, cellCoords.x, cellCoords.y);
+                    _grid.addEntity(entity, cellLocation.x, cellLocation.y);
                     break;
                 case snapMethods.snapToGrid:
                 default:

@@ -41,6 +41,26 @@ define(['components/brushes', 'components/snapMethods', 'components/Entity'], fu
                 };
             }
         },
+        wall: {
+            brush: brushes.wall,
+            snapMethod: snapMethods.snapToCell,
+            cursorBrush: brushes.wall,
+            getData: function (color, coords, cellCoords, guideLine) {
+                return {
+                    color: color,
+                    x: cellCoords.x,
+                    y: cellCoords.y,
+                    tag: 'wall'
+                };
+            },
+            getCursorData: function(color, coords, cellCoords, guideLine) {
+                return {
+                    color: color,
+                    x: cellCoords.x,
+                    y: cellCoords.y
+                };
+            }
+        },
         crosshair: {
             brush: brushes.crosshair,
             snapMethod: snapMethods.snapToGrid,

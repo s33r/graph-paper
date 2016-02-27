@@ -48,8 +48,326 @@ define(['../config'], function (config) {
     };
 
 
-    var _brushBox = function _brushBox(context, data, snapMethod) {
+    var _wallVertical = function _wallVertical(context, data, snapMethod) {
+        var _data = {
+            x: data.x || 0,
+            y: data.y || 0,
+            color: data.color || 'black'
+        };
 
+        _data.x = snapMethod(_data.x);
+        _data.y = snapMethod(_data.y);
+
+        context.beginPath();
+        context.strokeStyle = _data.color;
+        context.lineWidth = 1;
+
+        _drawLeft(context, _data.x, _data.y);
+        _drawRight(context, _data.x, _data.y);
+
+        context.stroke();
+        context.closePath();
+
+        _drawNegativeSlope(context, _data.x, _data.y);
+    };
+
+    var _wallHorizontal = function _wallHorizontal(context, data, snapMethod) {
+        var _data = {
+            x: data.x || 0,
+            y: data.y || 0,
+            color: data.color || 'black'
+        };
+
+        _data.x = snapMethod(_data.x);
+        _data.y = snapMethod(_data.y);
+
+        context.beginPath();
+        context.strokeStyle = _data.color;
+        context.lineWidth = 1;
+
+        _drawTop(context, _data.x, _data.y);
+        _drawBottom(context, _data.x, _data.y);
+
+        context.stroke();
+        context.closePath();
+
+        _drawNegativeSlope(context, _data.x, _data.y);
+    };
+
+    var _wallTopCap = function _wallTopCap(context, data, snapMethod) {
+        var _data = {
+            x: data.x || 0,
+            y: data.y || 0,
+            color: data.color || 'black'
+        };
+
+        _data.x = snapMethod(_data.x);
+        _data.y = snapMethod(_data.y);
+
+        context.beginPath();
+        context.strokeStyle = data.color;
+        context.lineWidth = 1;
+
+        _drawLeft(context, data.x, data.y);
+        _drawRight(context, data.x, data.y);
+        _drawTop(context, data.x, data.y);
+
+        context.stroke();
+        context.closePath();
+
+        _drawNegativeSlope(context, data.x, data.y);
+    };
+
+    var _wallBottomCap = function _wallBottomCap(context, data, snapMethod) {
+        var _data = {
+            x: data.x || 0,
+            y: data.y || 0,
+            color: data.color || 'black'
+        };
+
+        _data.x = snapMethod(_data.x);
+        _data.y = snapMethod(_data.y);
+
+        context.beginPath();
+        context.strokeStyle = data.color;
+        context.lineWidth = 1;
+
+        _drawLeft(context, data.x, data.y);
+        _drawRight(context, data.x, data.y);
+        _drawBottom(context, data.x, data.y);
+
+        context.stroke();
+        context.closePath();
+
+        _drawNegativeSlope(context, data.x, data.y);
+    };
+
+    var _wallRightCap = function _wallRightCap(context, data, snapMethod) {
+        var _data = {
+            x: data.x || 0,
+            y: data.y || 0,
+            color: data.color || 'black'
+        };
+
+        _data.x = snapMethod(_data.x);
+        _data.y = snapMethod(_data.y);
+
+        context.beginPath();
+        context.strokeStyle = data.color;
+        context.lineWidth = 1;
+
+        _drawTop(context, data.x, data.y);
+        _drawRight(context, data.x, data.y);
+        _drawBottom(context, data.x, data.y);
+
+        context.stroke();
+        context.closePath();
+
+        _drawNegativeSlope(context, data.x, data.y);
+    };
+
+    var _wallLeftCap = function _wallLeftCap(context, data, snapMethod) {
+        var _data = {
+            x: data.x || 0,
+            y: data.y || 0,
+            color: data.color || 'black'
+        };
+
+        _data.x = snapMethod(_data.x);
+        _data.y = snapMethod(_data.y);
+
+        context.beginPath();
+        context.strokeStyle = data.color;
+        context.lineWidth = 1;
+
+        _drawLeft(context, data.x, data.y);
+        _drawBottom(context, data.x, data.y);
+        _drawTop(context, data.x, data.y);
+
+        context.stroke();
+        context.closePath();
+
+        _drawNegativeSlope(context, data.x, data.y);
+    };
+
+    var _wallTopLeft = function _wallTopLeft(context, data, snapMethod) {
+        var _data = {
+            x: data.x || 0,
+            y: data.y || 0,
+            color: data.color || 'black'
+        };
+
+        _data.x = snapMethod(_data.x);
+        _data.y = snapMethod(_data.y);
+
+        context.beginPath();
+        context.strokeStyle = _data.color;
+        context.lineWidth = 1;
+
+        _drawLeft(context, _data.x, _data.y);
+        _drawTop(context, _data.x, _data.y);
+
+        context.stroke();
+        context.closePath();
+
+        _drawNegativeSlope(context, _data.x, _data.y);
+    };
+
+    var _wallTopRight = function _wallTopRight(context, data, snapMethod) {
+        var _data = {
+            x: data.x || 0,
+            y: data.y || 0,
+            color: data.color || 'black'
+        };
+
+        _data.x = snapMethod(_data.x);
+        _data.y = snapMethod(_data.y);
+
+        context.beginPath();
+        context.strokeStyle = _data.color;
+        context.lineWidth = 1;
+
+        _drawRight(context, _data.x, _data.y);
+        _drawTop(context, _data.x, _data.y);
+
+        context.stroke();
+        context.closePath();
+
+        _drawNegativeSlope(context, _data.x, _data.y);
+    };
+
+    var _wallBottomLeft = function _wallBottomLeft(context, data, snapMethod) {
+        var _data = {
+            x: data.x || 0,
+            y: data.y || 0,
+            color: data.color || 'black'
+        };
+
+        _data.x = snapMethod(_data.x);
+        _data.y = snapMethod(_data.y);
+
+        context.beginPath();
+        context.strokeStyle = _data.color;
+        context.lineWidth = 1;
+
+        _drawLeft(context, _data.x, _data.y);
+        _drawBottom(context, _data.x, _data.y);
+
+        context.stroke();
+        context.closePath();
+
+        _drawNegativeSlope(context, _data.x, _data.y);
+    };
+
+    var _wallBottomRight = function _wallBottomRight(context, data, snapMethod) {
+        var _data = {
+            x: data.x || 0,
+            y: data.y || 0,
+            color: data.color || 'black'
+        };
+
+        _data.x = snapMethod(_data.x);
+        _data.y = snapMethod(_data.y);
+
+        context.beginPath();
+        context.strokeStyle = _data.color;
+        context.lineWidth = 1;
+
+        _drawRight(context, _data.x, _data.y);
+        _drawBottom(context, _data.x, _data.y);
+
+        context.stroke();
+        context.closePath();
+
+        _drawNegativeSlope(context, _data.x, _data.y);
+    };
+
+    var _wallEmpty = function _wallEmpty(context, data, snapMethod) {
+
+    };
+
+
+    var _wallTTop = function _wallTTop(context, data, snapMethod) {
+        var _data = {
+            x: data.x || 0,
+            y: data.y || 0,
+            color: data.color || 'black'
+        };
+
+        _data.x = snapMethod(_data.x);
+        _data.y = snapMethod(_data.y);
+
+        context.beginPath();
+        context.strokeStyle = _data.color;
+        context.lineWidth = 1;
+
+        _drawTop(context, _data.x, _data.y);
+
+        context.stroke();
+        context.closePath();
+    };
+
+    var _wallTBottom = function _wallTBottom(context, data, snapMethod) {
+        var _data = {
+            x: data.x || 0,
+            y: data.y || 0,
+            color: data.color || 'black'
+        };
+
+        _data.x = snapMethod(_data.x);
+        _data.y = snapMethod(_data.y);
+
+        context.beginPath();
+        context.strokeStyle = _data.color;
+        context.lineWidth = 1;
+
+        _drawBottom(context, _data.x, _data.y);
+
+        context.stroke();
+        context.closePath();
+    };
+
+    var _wallTLeft = function _wallTLeft(context, data, snapMethod) {
+        var _data = {
+            x: data.x || 0,
+            y: data.y || 0,
+            color: data.color || 'black'
+        };
+
+        _data.x = snapMethod(_data.x);
+        _data.y = snapMethod(_data.y);
+
+        context.beginPath();
+        context.strokeStyle = _data.color;
+        context.lineWidth = 1;
+
+        _drawLeft(context, _data.x, _data.y);
+
+        context.stroke();
+        context.closePath();
+    };
+
+    var _wallTRight = function _wallTRight(context, data, snapMethod) {
+        var _data = {
+            x: data.x || 0,
+            y: data.y || 0,
+            color: data.color || 'black'
+        };
+
+        _data.x = snapMethod(_data.x);
+        _data.y = snapMethod(_data.y);
+
+        context.beginPath();
+        context.strokeStyle = _data.color;
+        context.lineWidth = 1;
+
+        _drawRight(context, _data.x, _data.y);
+
+        context.stroke();
+        context.closePath();
+    };
+
+    var _brushBox = function _brushBox(context, data, snapMethod) {
         var _data = {
             x: data.x || 0,
             y: data.y || 0,
@@ -138,7 +456,28 @@ define(['../config'], function (config) {
     return {
         "line": _brushLine,
         "box": _brushBox,
-        "crosshair": _crosshair
+        "crosshair": _crosshair,
+
+        "wall": _brushBox,
+        "wall-empty": _wallEmpty,
+
+        "wall-vertical": _wallVertical,
+        "wall-horizontal": _wallHorizontal,
+
+        "wall-cap-top": _wallTopCap,
+        "wall-cap-bottom": _wallBottomCap,
+        "wall-cap-left": _wallLeftCap,
+        "wall-cap-right": _wallRightCap,
+
+        "wall-corner-top-right": _wallTopRight,
+        "wall-corner-top-left": _wallTopLeft,
+        "wall-corner-bottom-right": _wallBottomRight,
+        "wall-corner-bottom-left": _wallBottomLeft,
+
+        "wall-t-top": _wallTTop,
+        "wall-t-bottom": _wallTBottom,
+        "wall-t-right": _wallTRight,
+        "wall-t-left": _wallTLeft
     };
 
 });
