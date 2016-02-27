@@ -83,6 +83,8 @@ define([
         }, false);
 
         canvasElement.addEventListener('mouseup', function (e) {
+            console.log('mouseup = %o', e);
+
             _guideLine.visible = false;
             var mousePosition = mouse.getPosition();
             var formData = controller.getFormData();
@@ -103,11 +105,20 @@ define([
 
             switch (entity.snapMethod) {
                 case snapMethods.snapToCell:
-                    _grid.addEntity(entity, cellLocation.x, cellLocation.y);
+                    if (e.button === 0) {
+                        _grid.addEntity(entity, cellLocation.x, cellLocation.y);
+                    } else if (e.button === 2) {
+                        _grid.removeEntity(cellLocation.x, cellLocation.y);
+                    }
                     break;
                 case snapMethods.snapToGrid:
                 default:
-                    _grid.addEntity(entity);
+                    if (e.button === 0) {
+                        _grid.addEntity(entity);
+                    } else if (e.button === 2) {
+                        _grid.removeEntity(entity);
+                    }
+
             }
 
         }, false);
