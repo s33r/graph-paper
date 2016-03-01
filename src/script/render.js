@@ -5,15 +5,15 @@ define(['./shapes/Rectangle'],
 
         var _setup = function _setup(canvasElement) {
             _canvasElement = canvasElement;
-            _canvas = canvasElement;
-            _context = _canvas.getContext('2d');
+            _canvas        = canvasElement;
+            _context       = _canvas.getContext('2d');
 
             _resize(canvasElement);
         };
 
         var _resize = function _resize() {
-            _canvas.width = _canvasElement.clientWidth;
-            _canvas.height = _canvasElement.clientHeight;
+            _canvas.width         = _canvasElement.clientWidth;
+            _canvas.height        = _canvasElement.clientHeight;
             _canvas.style.display = 'block';
         };
 
@@ -46,5 +46,5 @@ define(['./shapes/Rectangle'],
             render: _render,
             resize: _resize,
             getBoundingBox: _getBoundingBox
-        }
+        };
     });

@@ -75,20 +75,18 @@ define([
 
 
             if (formData.selectedBrush === 'line') {
-                _guideLine.color = formData.selectedColor;
+                _guideLine.color       = formData.selectedColor;
                 _guideLine.line.startX = snapMethods.snapToGrid(position.x);
                 _guideLine.line.startY = snapMethods.snapToGrid(position.y);
-                _guideLine.visible = true;
+                _guideLine.visible     = true;
             }
         }, false);
 
         canvasElement.addEventListener('mouseup', function (e) {
-            console.log('mouseup = %o', e);
-
             _guideLine.visible = false;
-            var mousePosition = mouse.getPosition();
-            var formData = controller.getFormData();
-            var cellLocation = _grid.locateCell(mousePosition.canvasX, mousePosition.canvasY);
+            var mousePosition  = mouse.getPosition();
+            var formData       = controller.getFormData();
+            var cellLocation   = _grid.locateCell(mousePosition.canvasX, mousePosition.canvasY);
 
             var cellCoords = {
                 x: cellLocation.x * config.getSpacing() + _grid.container.x,
@@ -112,6 +110,8 @@ define([
                     }
                     break;
                 case snapMethods.snapToGrid:
+                //For js hint:
+                /* falls through */
                 default:
                     if (e.button === 0) {
                         _grid.addEntity(entity);
@@ -126,9 +126,9 @@ define([
 
     var _setCursor = function _setCursor() {
         var mousePosition = mouse.getPosition();
-        var formData = controller.getFormData();
-        var cellLocation = _grid.locateCell(mousePosition.canvasX, mousePosition.canvasY);
-        var cellCoords = {
+        var formData      = controller.getFormData();
+        var cellLocation  = _grid.locateCell(mousePosition.canvasX, mousePosition.canvasY);
+        var cellCoords    = {
             x: cellLocation.x * config.getSpacing() + _grid.container.x,
             y: cellLocation.y * config.getSpacing() + _grid.container.y
         };
@@ -145,7 +145,7 @@ define([
     };
 
     var _reset = function _reset() {
-        _grid = new Grid(render.getBoundingBox());
+        _grid      = new Grid(render.getBoundingBox());
         _guideLine = new GuideLine(
             new Line(),
             'blue'
@@ -164,7 +164,7 @@ define([
 
     var _run = function (canvasId) {
         config.setSpacing(16);
-        _canvasId = canvasId;
+        _canvasId         = canvasId;
         var canvasElement = document.getElementById(canvasId);
 
         if (!canvasElement) {
@@ -181,9 +181,7 @@ define([
         _loopId = _startLoop();
     };
 
-    _run('mainCanvas');
-
     return {
         run: _run
-    }
+    };
 });

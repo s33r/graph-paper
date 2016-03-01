@@ -1,4 +1,4 @@
-define(['./brushes'], function (brushes) {
+define(['components/brushes'], function (brushes) {
     var _wallTerminals = {
         top: [
             'wall-empty',
@@ -70,7 +70,7 @@ define(['./brushes'], function (brushes) {
 
         for (var j = 0; j < terminalList.length; j++) {
             var isMatch = wallBrush == brushes[terminalList[j]];
-            isTerminal = isTerminal || isMatch;
+            isTerminal  = isTerminal || isMatch;
         }
 
         return !isTerminal;
@@ -128,10 +128,10 @@ define(['./brushes'], function (brushes) {
         var self = this;
 
         this.setWall = function (entity, x, y) {
-            var top = _isWall(grid.getCell(x, y - 1));
+            var top    = _isWall(grid.getCell(x, y - 1));
             var bottom = _isWall(grid.getCell(x, y + 1));
-            var left = _isWall(grid.getCell(x - 1, y));
-            var right = _isWall(grid.getCell(x + 1, y));
+            var left   = _isWall(grid.getCell(x - 1, y));
+            var right  = _isWall(grid.getCell(x + 1, y));
 
             var surround = _getWallSurround(top, bottom, left, right);
 

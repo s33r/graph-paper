@@ -1,4 +1,4 @@
-define(['../config'], function (config) {
+define(['config'], function (config) {
 
     var _snapToCell = function _snapToCell(value) {
         return value - (value % config.getSpacing());

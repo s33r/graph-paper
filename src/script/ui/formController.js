@@ -1,4 +1,4 @@
-define(['./mouse', 'components/brushes', './TypeAhead'], function (mouse, brushes, TypeAhead) {
+define(['ui//mouse', 'components/brushes'], function (mouse, brushes, TypeAhead) {
 
     var _currentBrush;
     var _updateBrush = function _updateBrush(brushPicker) {
@@ -12,20 +12,20 @@ define(['./mouse', 'components/brushes', './TypeAhead'], function (mouse, brushe
 
     var typeAhead;
 
-    var _defaults =  {
-            color: 'blue',
-            brush: 'line'
-        };
+    var _defaults = {
+        color: 'blue',
+        brush: 'line'
+    };
 
     var _setup = function _setup(defaults) {
         if (!defaults) {
             defaults = _defaults;
         }
 
-        var collapseButton = document.getElementById('toggleCollapseButton');
-        var mainMenu = document.getElementById('mainMenu');
-        var colorPicker = document.getElementById('colorPicker');
-        var brushPicker = document.getElementById('brushPicker');
+        var collapseButton      = document.getElementById('toggleCollapseButton');
+        var mainMenu            = document.getElementById('mainMenu');
+        var colorPicker         = document.getElementById('colorPicker');
+        var brushPicker         = document.getElementById('brushPicker');
         var colorPickerDropdown = document.getElementById('colorPickerDropdown');
 
         //typeAhead = new TypeAhead(colorPicker, colorPickerDropdown);
@@ -67,6 +67,6 @@ define(['./mouse', 'components/brushes', './TypeAhead'], function (mouse, brushe
         setup: _setup,
         update: _update,
         getFormData: _getFormData
-    }
+    };
 
 });

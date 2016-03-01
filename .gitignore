@@ -34,3 +34,7 @@ node_modules
 
 # InteliJ
 .idea
+
+
+#Built files
+/build

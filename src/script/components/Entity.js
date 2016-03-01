@@ -1,4 +1,4 @@
-define(['./brushes'], function (brushes) {
+define(['components/brushes'], function (brushes) {
 
     var _defaultSnapMethod = function _defaultSnapMethod(value) {
         return value;
@@ -9,16 +9,18 @@ define(['./brushes'], function (brushes) {
     };
 
     return function Entity(data, brush, snapMethod) {
-        this.data = data || null;
-        this.brush = brush;
+        this.data       = data || null;
+        this.brush      = brush;
         this.snapMethod = snapMethod || null;
 
         this.render = function render(context) {
-            var brush = this.brush || _defaultBrush;
-            var data = this.data || {};
+            var brush      = this.brush || _defaultBrush;
+            var data       = this.data || {};
             var snapMethod = this.snapMethod || _defaultSnapMethod;
 
-            brush && brush(context, data, snapMethod);
+            if(typeof brush === 'function'){
+                brush(context, data, snapMethod);
+            }
         };
     };
 

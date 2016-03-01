@@ -13,6 +13,6 @@ define([], function () {
     return {
         getSpacing: _getSpacing,
         setSpacing: _setSpacing
-    }
+    };
 
 });

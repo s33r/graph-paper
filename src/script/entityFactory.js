@@ -14,7 +14,7 @@ define(['components/brushes', 'components/snapMethods', 'components/Entity'], fu
                     endY: guideLine.endY
                 };
             },
-            getCursorData: function(color, coords, cellCoords, guideLine) {
+            getCursorData: function (color, coords, cellCoords, guideLine) {
                 return {
                     color: color,
                     x: coords.canvasX,
@@ -33,7 +33,7 @@ define(['components/brushes', 'components/snapMethods', 'components/Entity'], fu
                     y: cellCoords.y
                 };
             },
-            getCursorData: function(color, coords, cellCoords, guideLine) {
+            getCursorData: function (color, coords, cellCoords, guideLine) {
                 return {
                     color: color,
                     x: cellCoords.x,
@@ -53,7 +53,7 @@ define(['components/brushes', 'components/snapMethods', 'components/Entity'], fu
                     tag: 'wall'
                 };
             },
-            getCursorData: function(color, coords, cellCoords, guideLine) {
+            getCursorData: function (color, coords, cellCoords, guideLine) {
                 return {
                     color: color,
                     x: cellCoords.x,
@@ -72,7 +72,7 @@ define(['components/brushes', 'components/snapMethods', 'components/Entity'], fu
                     y: coords.canvasY
                 };
             },
-            getCursorData: function(color, coords, cellCoords, guideLine) {
+            getCursorData: function (color, coords, cellCoords, guideLine) {
                 return {
                     color: color,
                     x: coords.canvasX,

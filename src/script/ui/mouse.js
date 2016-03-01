@@ -1,16 +1,16 @@
-define(['./../shapes/Rectangle'], function (Rectangle) {
+define(['shapes/Rectangle'], function (Rectangle) {
     var _clientX = 0;
     var _clientY = 0;
     var _canvasX = 0;
     var _canvasY = 0;
-    var _cell = new Rectangle();
+    var _cell    = new Rectangle();
 
     var _update = function (clientX, clientY, canvasX, canvasY, cell) {
         _clientX = clientX;
         _clientY = clientY;
         _canvasX = canvasX;
         _canvasY = canvasY;
-        _cell = cell;
+        _cell    = cell;
     };
 
     var _getPosition = function _getPosition() {
@@ -26,5 +26,5 @@ define(['./../shapes/Rectangle'], function (Rectangle) {
     return {
         update: _update,
         getPosition: _getPosition
-    }
+    };
 });

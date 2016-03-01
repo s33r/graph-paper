@@ -1,4 +1,4 @@
-define(['../config'], function (config) {
+define(['config'], function (config) {
 
 
     var _drawTop = function (context, x, y) {
@@ -24,7 +24,7 @@ define(['../config'], function (config) {
     var _drawNegativeSlope = function _drawNegativeSlope(context, x, y, color) {
         context.beginPath();
 
-        context.lineWidth = 1;
+        context.lineWidth   = 1;
         context.strokeStyle = color;
 
         context.moveTo(x, y);
@@ -37,7 +37,7 @@ define(['../config'], function (config) {
     var _drawPositiveSlope = function _drawPositiveSlope(context, x, y, color) {
         context.beginPath();
 
-        context.lineWidth = 1;
+        context.lineWidth   = 1;
         context.strokeStyle = color;
 
         context.moveTo(x, y + config.getSpacing());
@@ -60,7 +60,7 @@ define(['../config'], function (config) {
 
         context.beginPath();
         context.strokeStyle = _data.color;
-        context.lineWidth = 1;
+        context.lineWidth   = 1;
 
         _drawLeft(context, _data.x, _data.y);
         _drawRight(context, _data.x, _data.y);
@@ -83,7 +83,7 @@ define(['../config'], function (config) {
 
         context.beginPath();
         context.strokeStyle = _data.color;
-        context.lineWidth = 1;
+        context.lineWidth   = 1;
 
         _drawTop(context, _data.x, _data.y);
         _drawBottom(context, _data.x, _data.y);
@@ -106,7 +106,7 @@ define(['../config'], function (config) {
 
         context.beginPath();
         context.strokeStyle = data.color;
-        context.lineWidth = 1;
+        context.lineWidth   = 1;
 
         _drawLeft(context, data.x, data.y);
         _drawRight(context, data.x, data.y);
@@ -130,7 +130,7 @@ define(['../config'], function (config) {
 
         context.beginPath();
         context.strokeStyle = data.color;
-        context.lineWidth = 1;
+        context.lineWidth   = 1;
 
         _drawLeft(context, data.x, data.y);
         _drawRight(context, data.x, data.y);
@@ -154,7 +154,7 @@ define(['../config'], function (config) {
 
         context.beginPath();
         context.strokeStyle = data.color;
-        context.lineWidth = 1;
+        context.lineWidth   = 1;
 
         _drawTop(context, data.x, data.y);
         _drawRight(context, data.x, data.y);
@@ -178,7 +178,7 @@ define(['../config'], function (config) {
 
         context.beginPath();
         context.strokeStyle = data.color;
-        context.lineWidth = 1;
+        context.lineWidth   = 1;
 
         _drawLeft(context, data.x, data.y);
         _drawBottom(context, data.x, data.y);
@@ -202,7 +202,7 @@ define(['../config'], function (config) {
 
         context.beginPath();
         context.strokeStyle = _data.color;
-        context.lineWidth = 1;
+        context.lineWidth   = 1;
 
         _drawLeft(context, _data.x, _data.y);
         _drawTop(context, _data.x, _data.y);
@@ -225,7 +225,7 @@ define(['../config'], function (config) {
 
         context.beginPath();
         context.strokeStyle = _data.color;
-        context.lineWidth = 1;
+        context.lineWidth   = 1;
 
         _drawRight(context, _data.x, _data.y);
         _drawTop(context, _data.x, _data.y);
@@ -248,7 +248,7 @@ define(['../config'], function (config) {
 
         context.beginPath();
         context.strokeStyle = _data.color;
-        context.lineWidth = 1;
+        context.lineWidth   = 1;
 
         _drawLeft(context, _data.x, _data.y);
         _drawBottom(context, _data.x, _data.y);
@@ -271,7 +271,7 @@ define(['../config'], function (config) {
 
         context.beginPath();
         context.strokeStyle = _data.color;
-        context.lineWidth = 1;
+        context.lineWidth   = 1;
 
         _drawRight(context, _data.x, _data.y);
         _drawBottom(context, _data.x, _data.y);
@@ -299,7 +299,7 @@ define(['../config'], function (config) {
 
         context.beginPath();
         context.strokeStyle = _data.color;
-        context.lineWidth = 1;
+        context.lineWidth   = 1;
 
         _drawTop(context, _data.x, _data.y);
 
@@ -319,7 +319,7 @@ define(['../config'], function (config) {
 
         context.beginPath();
         context.strokeStyle = _data.color;
-        context.lineWidth = 1;
+        context.lineWidth   = 1;
 
         _drawBottom(context, _data.x, _data.y);
 
@@ -339,7 +339,7 @@ define(['../config'], function (config) {
 
         context.beginPath();
         context.strokeStyle = _data.color;
-        context.lineWidth = 1;
+        context.lineWidth   = 1;
 
         _drawLeft(context, _data.x, _data.y);
 
@@ -359,7 +359,7 @@ define(['../config'], function (config) {
 
         context.beginPath();
         context.strokeStyle = _data.color;
-        context.lineWidth = 1;
+        context.lineWidth   = 1;
 
         _drawRight(context, _data.x, _data.y);
 
@@ -379,7 +379,7 @@ define(['../config'], function (config) {
 
         context.beginPath();
         context.strokeStyle = _data.color;
-        context.lineWidth = 1;
+        context.lineWidth   = 1;
 
         _drawLeft(context, _data.x, _data.y);
         _drawRight(context, _data.x, _data.y);
@@ -404,13 +404,13 @@ define(['../config'], function (config) {
 
         _data.startX = snapMethod(_data.startX);
         _data.startY = snapMethod(_data.startY);
-        _data.endX = snapMethod(_data.endX);
-        _data.endY = snapMethod(_data.endY);
+        _data.endX   = snapMethod(_data.endX);
+        _data.endY   = snapMethod(_data.endY);
 
 
         context.beginPath();
         context.strokeStyle = _data.color;
-        context.lineWidth = 1;
+        context.lineWidth   = 1;
 
         context.moveTo(_data.startX, _data.startY);
         context.lineTo(_data.endX, _data.endY);
@@ -422,7 +422,7 @@ define(['../config'], function (config) {
 
     var _crosshair = function _crosshair(context, data, snapMethod) {
         var spacing = config.getSpacing();
-        var _data = {
+        var _data   = {
             x: data.x || 0,
             y: data.y || 0,
             color: data.color || 'black'
@@ -433,7 +433,7 @@ define(['../config'], function (config) {
 
         context.beginPath();
         context.strokeStyle = _data.color;
-        context.lineWidth = 1;
+        context.lineWidth   = 1;
 
         //_drawLeft(context, _data.x, _data.y);
         //_drawRight(context, _data.x, _data.y);

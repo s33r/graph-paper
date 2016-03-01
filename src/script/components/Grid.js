@@ -1,16 +1,16 @@
 define([
-    '../config',
-    './../shapes/Rectangle',
-    './Entity',
-    './brushes',
-    './snapMethods',
-    './WallWalker'
+    'config',
+    'shapes/Rectangle',
+    'components/Entity',
+    'components/brushes',
+    'components/snapMethods',
+    'components/WallWalker'
 ], function (config, Rectangle, Entity, brushes, snapMethods, WallWalker) {
 
     var _renderBackground = function (context, container, spacing) {
         context.beginPath();
         context.strokeStyle = 'lightblue';
-        context.lineWidth = 1;
+        context.lineWidth   = 1;
 
         for (var y = spacing; y < container.height; y = y + spacing) {
             context.moveTo(container.x, y);
@@ -110,7 +110,7 @@ define([
         };
 
         this.removeEntity = function removeEntity(entity, x, y) {
-            if (entity != null && !(entity instanceof Entity)) {
+            if (entity !== null && !(entity instanceof Entity)) {
                 self.removeEntity(null, entity, x);
 
             } else {
